@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/Ilyasich/hackaton/config"
 	"github.com/Ilyasich/hackaton/handlers"
+	"github.com/Ilyasich/hackaton/models"
 	"github.com/Ilyasich/hackaton/repositories/chats"
 	"github.com/Ilyasich/hackaton/repositories/memory"
 	"github.com/Ilyasich/hackaton/services"
@@ -34,13 +35,32 @@ func main() {
 	updates := bot.GetUpdatesChan(updateConfig)
 
 	for update := range updates {
+		ID := update.FromChat().ID
 		if !serv.ChatExists(update.FromChat().ID) {
-			serv.AddChat(update.FromChat().ID)
+			serv.AddChat(ID)
 		}
 		msg := handlers.Registerhandler(update)
 		if msg.Text != "exept" {
-
+			serv.ChangeChatCont(ID, models.REG)
 			if _, err := bot.Send(msg); err != nil {
+				serv.ChangeChatCont(ID, models.EMPTY)
+				panic(err)
+			}
+			continue
+		}
+		msg = handlers.CryptoWalletChangehandler(update)
+		if msg.Text != "exept" {
+			serv.ChangeChatCont(ID, models.CHTONAC)
+			if _, err := bot.Send(msg); err != nil {
+				serv.ChangeChatCont(ID, models.EMPTY)
+				panic(err)
+			}
+			continue
+		}
+		msg = handlers.GetLinkHandler(update, &serv, &conf)
+		if msg.Text != "exept" {
+			if _, err := bot.Send(msg); err != nil {
+				serv.ChangeChatCont(ID, models.EMPTY)
 				panic(err)
 			}
 			continue

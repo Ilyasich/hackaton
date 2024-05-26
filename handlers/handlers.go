@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"github.com/Ilyasich/hackaton/config"
 	"github.com/Ilyasich/hackaton/models"
 	"github.com/Ilyasich/hackaton/services"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
@@ -28,7 +29,7 @@ func CryptoWalletChangehandler(upd tgbotapi.Update) tgbotapi.MessageConfig {
 	}
 }
 
-func GetLinkHandler(upd tgbotapi.Update, ser *services.Service) tgbotapi.MessageConfig {
+func GetLinkHandler(upd tgbotapi.Update, ser *services.Service, conf *config.Config) tgbotapi.MessageConfig {
 	if upd.CallbackQuery == nil {
 		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
 	}
@@ -38,7 +39,7 @@ func GetLinkHandler(upd tgbotapi.Update, ser *services.Service) tgbotapi.Message
 		} else if ser.IsBanned(models.TelegramID(upd.CallbackQuery.From.ID)) {
 			return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
 		}
-		return tgbotapi.NewMessage(upd.FromChat().ID, "Пожалуйста введите новый номер криптокошелька для продолжения")
+		return tgbotapi.NewMessage(upd.FromChat().ID, conf.Tg.InvLink)
 	} else {
 		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
 	}
