@@ -1,8 +1,8 @@
 package transport
 
 import (
-	"hackaton/config"
-	"hackaton/models"
+	"github.com/Ilyasich/hackaton/tree/internal_dev/config"
+	"github.com/Ilyasich/hackaton/tree/internal_dev/models"
 	"encoding/json"
 
 	"github.com/go-resty/resty/v2"

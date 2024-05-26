@@ -1,7 +1,7 @@
 package services
 
 import (
-	"hackaton/models"
+	"github.com/Ilyasich/hackaton/tree/internal_dev/models"
 )
 
 func (ser *Service) SetBanned(user *models.User) {

@@ -1,6 +1,6 @@
 package memory
 
-import mods "hackaton/models"
+import mods "github.com/Ilyasich/hackaton/tree/internal_dev/models"
 
 type Repository []mods.User
 

@@ -1,7 +1,7 @@
 package worker
 
 import (
-	"hackaton/services"
+	"github.com/Ilyasich/hackaton/tree/internal_dev/services"
 	"time"
 )
 

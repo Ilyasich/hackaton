@@ -1,8 +1,8 @@
 package services
 
 import (
-	mods "hackaton/models"
-	"hackaton/transport"
+	mods "github.com/Ilyasich/hackaton/tree/internal_dev/models"
+	"github.com/Ilyasich/hackaton/tree/internal_dev/transport"
 )
 
 type AccountsRepository interface {
