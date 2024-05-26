@@ -1,11 +1,13 @@
 package handlers
 
 import (
-	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 	"fmt"
+
+	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
-func Registerhandler(upd tgbotapi.update){
-	if upd.InlineBotCallbackQuery == nil{
+
+func Registerhandler(upd tgbotapi.Update) {
+	if upd.InlineBotCallbackQuery == nil {
 		return
 	}
 	fmt.Println("button pressed")

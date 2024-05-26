@@ -1,8 +1,9 @@
 package worker
 
 import (
-	"github.com/Ilyasich/hackaton/tree/internal_dev/services"
 	"time"
+
+	"github.com/Ilyasich/hackaton/services"
 )
 
 type Worker struct {

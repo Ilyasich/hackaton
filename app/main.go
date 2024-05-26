@@ -16,7 +16,7 @@ func main() {
 	updateConfig.Timeout = 30
 	updates := bot.GetUpdatesChan(updateConfig)
 	//client := resty.New()
-	for update := range updates {
+	for _ = range updates {
 		//handlers.Registerhandler(update)
 		//if update.Message.Chat.Type != "private" {
 		//	continue
