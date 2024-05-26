@@ -52,3 +52,12 @@ func (rep *Repository) SetBanned(tgacc mods.TelegramID, state bool) bool {
 	}
 	return false
 }
+
+func (rep *Repository) IsBanned(tgacc mods.TelegramID) bool {
+	for _, el := range *rep {
+		if el.Tgacc == tgacc {
+			return el.IsBanned
+		}
+	}
+	return false
+}

@@ -2,7 +2,7 @@ package models
 
 type AccountID string
 
-type TelegramID int32
+type TelegramID int64
 
 type User struct {
 	Tgacc    TelegramID

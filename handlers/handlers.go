@@ -1,14 +1,45 @@
 package handlers
 
 import (
-	"fmt"
-
+	"github.com/Ilyasich/hackaton/models"
+	"github.com/Ilyasich/hackaton/services"
 	tgbotapi "github.com/go-telegram-bot-api/telegram-bot-api/v5"
 )
 
-func Registerhandler(upd tgbotapi.Update) {
-	if upd.InlineBotCallbackQuery == nil {
-		return
+func Registerhandler(upd tgbotapi.Update) tgbotapi.MessageConfig {
+	if upd.CallbackQuery == nil {
+		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
 	}
-	fmt.Println("button pressed")
+	if upd.CallbackQuery.Data == "reg" {
+		return tgbotapi.NewMessage(upd.FromChat().ID, "Пожалуйста введите номер своего криптокошелька для продолжения")
+	} else {
+		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
+	}
+}
+
+func CryptoWalletChangehandler(upd tgbotapi.Update) tgbotapi.MessageConfig {
+	if upd.CallbackQuery == nil {
+		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
+	}
+	if upd.CallbackQuery.Data == "tonchange" {
+		return tgbotapi.NewMessage(upd.FromChat().ID, "Пожалуйста введите новый номер криптокошелька для продолжения")
+	} else {
+		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
+	}
+}
+
+func GetLinkHandler(upd tgbotapi.Update, ser *services.Service) tgbotapi.MessageConfig {
+	if upd.CallbackQuery == nil {
+		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
+	}
+	if upd.CallbackQuery.Data == "getlink" {
+		if !ser.UserExists(models.TelegramID(upd.CallbackQuery.From.ID)) {
+			return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
+		} else if ser.IsBanned(models.TelegramID(upd.CallbackQuery.From.ID)) {
+			return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
+		}
+		return tgbotapi.NewMessage(upd.FromChat().ID, "Пожалуйста введите новый номер криптокошелька для продолжения")
+	} else {
+		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
+	}
 }
