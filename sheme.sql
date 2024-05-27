@@ -1,0 +1,9 @@
+CREATE TABLE IF NOT EXISTS users (
+    user_id SERIAL PRIMARY KEY,
+    user_name VARCHAR(100) NOT NULL
+); 
+
+CREATE TABLE IF NOT EXISTS wallet (
+    user_id SERIAL PRIMARY KEY,
+    wallet_name VARCHAR(100) NOT NULL
+); 

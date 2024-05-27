@@ -27,22 +27,23 @@ func main() {
 		if update.Message.Chat.Type != "private" {
 			continue
 		}
-		
+
 		if checkBalance() {
 			// Добавляем кнопку "да"
-			yesButton := tgbotapi.NewInlineKeyboardButtonData("Да", "yes")
-			noButton := tgbotapi.NewInlineKeyboardButtonData("Нет", "no")
-			inlineKeyboard := tgbotapi.NewInlineKeyboardMarkup([]tgbotapi.InlineKeyboardButton{yesButton, noButton})
+			// yesButton := tgbotapi.NewInlineKeyboardButtonData("Да", "yes")
+			// noButton := tgbotapi.NewInlineKeyboardButtonData("Нет", "no")
+			// inlineKeyboard := tgbotapi.NewInlineKeyboardMarkup([]tgbotapi.InlineKeyboardButton{yesButton, noButton})
 
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Хотите проверить баланс вашего кошелька?:")
-			msg.ReplyMarkup = inlineKeyboard
+			// msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Бот поможет найти группы единомышлениками с похожими NFT. Хотите сделать проверку?")
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "Мы нашли группы касающиеся ваших NFT:  @hs_cryptonews  @News_OpenSea  @geton")
+			// msg.ReplyMarkup = inlineKeyboard
 			msg.ReplyToMessageID = update.Message.MessageID
 
 			if _, err := bot.Send(msg); err != nil {
 				panic(err)
 			}
 		} else {
-			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "no group for you") 
+			msg := tgbotapi.NewMessage(update.Message.Chat.ID, "no group for you")
 			msg.ReplyToMessageID = update.Message.MessageID
 
 			if _, err := bot.Send(msg); err != nil {
@@ -51,9 +52,6 @@ func main() {
 		}
 	}
 }
-
-
-
 
 func checkBalance() bool {
 	req, err := http.NewRequest("GET", "https://tonapi.io/v2/accounts/UQCPZiICYEhhTC0xdYXLtpVKK4LBsDSJmZFl6ilJEP0oVR7y", nil)
