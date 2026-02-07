@@ -5,10 +5,10 @@ import (
 )
 
 func (ser *Service) SetBanned(user *models.User) {
-	if bal, _ := ser.rest.GetBalance(user.Tonacc); bal > 0 {
-		ser.rep.SetBanned(user.Tgacc, true)
-		return
-	} else {
+	// If user has balance (>0) they should NOT be banned. Otherwise they are banned.
+	if bal, ok := ser.rest.GetBalance(user.Tonacc); ok && bal > 0 {
 		ser.rep.SetBanned(user.Tgacc, false)
+		return
 	}
+	ser.rep.SetBanned(user.Tgacc, true)
 }

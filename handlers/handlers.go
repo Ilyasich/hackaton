@@ -12,7 +12,7 @@ func Registerhandler(upd tgbotapi.Update) tgbotapi.MessageConfig {
 		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
 	}
 	if upd.CallbackQuery.Data == "reg" {
-		return tgbotapi.NewMessage(upd.FromChat().ID, "Пожалуйста введите номер своего криптокошелька для продолжения")
+		return tgbotapi.NewMessage(upd.FromChat().ID, "Отлично — регистрация. Пожалуйста, отправьте адрес своего криптокошелька (TON) в сообщении.")
 	} else {
 		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
 	}
@@ -23,7 +23,7 @@ func CryptoWalletChangehandler(upd tgbotapi.Update) tgbotapi.MessageConfig {
 		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
 	}
 	if upd.CallbackQuery.Data == "tonchange" {
-		return tgbotapi.NewMessage(upd.FromChat().ID, "Пожалуйста введите новый номер криптокошелька для продолжения")
+		return tgbotapi.NewMessage(upd.FromChat().ID, "Хорошо — смена привязанного кошелька. Пожалуйста, отправьте новый адрес кошелька в сообщении.")
 	} else {
 		return tgbotapi.NewMessage(upd.FromChat().ID, "exept")
 	}
